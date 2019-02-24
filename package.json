@@ -7,6 +7,7 @@
     "@material-ui/icons": "^3.0.2",
     "react": "^16.8.3",
     "react-dom": "^16.8.3",
+    "react-ga": "^2.5.7",
     "react-paypal-express-checkout": "^1.0.5",
     "react-scripts": "2.1.5",
     "react-typeform-embed": "^0.2.0",
@@ -36,7 +37,6 @@
     "not op_mini all"
   ],
   "devDependencies": {
-    "eslint": "^5.14.1",
     "eslint-config-airbnb": "^17.1.0",
     "eslint-config-prettier": "^4.0.0",
     "eslint-plugin-import": "^2.16.0",

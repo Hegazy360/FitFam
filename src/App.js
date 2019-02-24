@@ -5,6 +5,7 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
+import ReactGA from 'react-ga';
 
 import 'typeface-roboto';
 
@@ -21,7 +22,10 @@ const theme = createMuiTheme({
 });
 
 class App extends Component {
-  state = {};
+  componentDidMount() {
+    ReactGA.initialize('UA-135073250-1');
+    ReactGA.pageview('home');
+  }
 
   render() {
     const onSuccess = payment => {
