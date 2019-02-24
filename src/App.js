@@ -65,13 +65,13 @@ class App extends Component {
             </Toolbar>
           </AppBar>
         </div>
-        <Typography  style={{marginTop: '100px', padding: 20, textAlign:"center"}} variant="h3">
+        <Typography  style={{marginTop: '100px', padding: 20, textAlign:"center"}} variant="h4">
           Step 1
         </Typography>
         <div style={{position: 'relative', height: '400px', marginTop: '50px', marginBottom: '50px'}}>
           <ReactTypeformEmbed url="https://mohamehegazi.typeform.com/to/qxOc2K" />
         </div>
-        <Typography  style={{ marginBottom: '10px', padding: 20, textAlign:"center"}} variant="h3">
+        <Typography  style={{ marginBottom: '10px', padding: 20, textAlign:"center"}} variant="h4">
           Step 2
         </Typography>
         <div>
@@ -86,7 +86,7 @@ class App extends Component {
             Keep an eye on your email!
           </Typography>
           <Typography  style={{  padding: 20, textAlign:"center"}} variant="h6">
-            If you got any questions or something is not right,<br/>or if you just want to say hello <a href = "mailto: abc@example.com">contact us</a> right now, we're friendly and want to help.
+            If you got any questions or something is not right,<br/>or if you just want to say hello <a href = "mailto: abc@example.com">contact us</a> right now, we're friendly.
           </Typography>
         </div>
       </MuiThemeProvider>
