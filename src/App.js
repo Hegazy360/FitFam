@@ -5,9 +5,11 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
+import Button from '@material-ui/core/Button';
 import ReactGA from 'react-ga';
-
 import 'typeface-roboto';
+import mainImage from './assets/images/main_image.jpg';
+import './App.css';
 
 const theme = createMuiTheme({
   palette: {
@@ -62,12 +64,23 @@ class App extends Component {
     return (
       <MuiThemeProvider theme={theme}>
         <div style={{ flexGrow: 1 }}>
-          <AppBar style={{ alignItems: 'center' }}>
+          <AppBar
+            position="fixed"
+            style={{
+              background: 'rgba(1,1,1,0.3)',
+              boxShadow: 'none',
+              alignItems: 'center'
+            }}
+          >
             <Toolbar>
               <Typography
-                style={{ padding: 20 }}
+                style={{
+                  padding: 10,
+                  fontFamily: '"Montserrat", sans-serif',
+                  fontWeight: 600
+                }}
                 component="h1"
-                variant="h2"
+                variant="h4"
                 color="inherit"
               >
                 Trainiac
@@ -75,11 +88,28 @@ class App extends Component {
             </Toolbar>
           </AppBar>
         </div>
+        <div>
+          <img src={mainImage} alt="Main" style={{ width: '100%' }} />
+          <div className="introductionTextContainer">
+            <h2 className="subtitle">Making your fitness journey easier</h2>
+            <h3 className="description">
+              Get your next fitness plan made by one of our personal trainers
+              <br />
+              and watch your body transform! Now for only 19.99€
+            </h3>
+            <Button variant="outlined" color="primary" href="#typeform">
+              Start now - in 2 steps
+            </Button>
+          </div>
+        </div>
         <Typography
-          style={{ marginTop: '100px', padding: 20, textAlign: 'center' }}
-          variant="h4"
+          id="typeform"
+          style={{ marginTop: '20px', padding: 20, textAlign: 'center' }}
+          variant="h6"
         >
           Step 1
+          <br />
+          Fill this simple dynamic form to help us create the best plan for you.
         </Typography>
         <div
           style={{
@@ -93,9 +123,15 @@ class App extends Component {
         </div>
         <Typography
           style={{ marginBottom: '10px', padding: 20, textAlign: 'center' }}
-          variant="h4"
+          variant="h6"
         >
           Step 2
+          <br />
+          For 19.99€ you get a certified personal trainer&apos;s support and
+          custom made plan
+          <br />
+          +
+          <br />a discount on your next plan!
         </Typography>
         <div>
           <PaypalExpressBtn
@@ -112,7 +148,6 @@ class App extends Component {
         <div>
           <Typography
             style={{ marginTop: '20px', padding: 20, textAlign: 'center' }}
-            variant="h5"
           >
             That&apos;s it, you&apos;re all done, easy right?
             <br />
@@ -121,7 +156,7 @@ class App extends Component {
             <br />
             Keep an eye on your email!
           </Typography>
-          <Typography style={{ padding: 20, textAlign: 'center' }} variant="h6">
+          <Typography style={{ padding: 20, textAlign: 'center' }}>
             If you got any questions or something is not right,
             <br />
             or if you just want to say hello{' '}
