@@ -160,7 +160,7 @@ class App extends Component {
             If you got any questions or something is not right,
             <br />
             or if you just want to say hello{' '}
-            <a href="mailto: abc@example.com">contact us</a> right now,
+            <a href="mailto: fitnessmotown@gmail.com">contact us</a> right now,
             we&apos;re friendly.
           </Typography>
         </div>
