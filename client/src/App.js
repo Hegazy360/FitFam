@@ -87,7 +87,7 @@ class App extends Component {
                     fit="cover"
                     style={{
                       width: '100%',
-                      minHeight: '500px'
+                      minHeight: '445px'
                     }}
                     src={homepage}
                   />
