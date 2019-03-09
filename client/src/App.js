@@ -85,7 +85,11 @@ class App extends Component {
                 <Box flex align="center" justify="center">
                   <Image
                     fit="cover"
-                    style={{ width: '100%', minHeight: '200px' }}
+                    style={{
+                      width: '100%',
+                      minHeight: '500px',
+                      marginTop: '160px'
+                    }}
                     src={homepage}
                   />
                   <br />
