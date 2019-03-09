@@ -87,8 +87,7 @@ class App extends Component {
                     fit="cover"
                     style={{
                       width: '100%',
-                      minHeight: '500px',
-                      marginTop: '160px'
+                      minHeight: '500px'
                     }}
                     src={homepage}
                   />
@@ -120,8 +119,8 @@ class App extends Component {
                   >
                     <Button label="Start now" onClick={() => {}} />
                     <Button
-                      plain
-                      icon={<Info color="brand" />}
+                      color="accent-4"
+                      icon={<Info color="accent-4" />}
                       label="Know more"
                       onClick={() => {}}
                     />
