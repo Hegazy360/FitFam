@@ -8,6 +8,7 @@
     "heroku-postbuild": "cd client && yarn install --only=dev && yarn install && yarn run build"
   },
   "dependencies": {
-    "express": "^4.16.4"
+    "express": "^4.16.4",
+    "prerender-node": "^3.2.1"
   }
 }

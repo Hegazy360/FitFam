@@ -92,6 +92,7 @@ class App extends Component {
                     src={homepage}
                   />
                   <br />
+                  <br />
                   <Heading
                     margin="none"
                     level="2"
