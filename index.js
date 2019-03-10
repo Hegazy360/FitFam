@@ -1,7 +1,23 @@
 const express = require("express");
 const path = require("path");
-
+const admin = require("firebase-admin");
 const app = express();
+
+// Fetch the service account key JSON file contents
+const serviceAccount = require("./trainiac-ccc94-firebase-adminsdk-l3oiy-9ceed19a16.json");
+
+// Initialize the app with a service account, granting admin privileges
+admin.initializeApp({
+  credential: admin.credential.cert(serviceAccount),
+});
+
+var db = admin.firestore();
+var docRef = db.collection('workout')
+
+const userRef = db.collection("workout").add({
+    fullname: "Test",
+    email: "Test@test.com"
+  });  
 
 // Serve the static files from the React app
 app.use(express.static(path.join(__dirname, "client/build")));

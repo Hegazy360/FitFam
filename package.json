@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "express": "^4.16.4",
+    "firebase-admin": "^7.0.0",
     "prerender-node": "^3.2.1"
   }
 }

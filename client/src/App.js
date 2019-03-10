@@ -15,6 +15,7 @@ import {
 } from 'grommet';
 import Lottie from 'react-lottie';
 import { Close, Menu, Info } from 'grommet-icons';
+
 // import Home from './pages/Home';
 // import List from './pages/List';
 import homepage from './assets/images/homepage.jpg';
@@ -63,6 +64,7 @@ class App extends Component {
     //     </Switch>
     //   </div>
     // );
+
     return (
       <Grommet theme={theme} full>
         <ResponsiveContext.Consumer>
@@ -129,7 +131,7 @@ class App extends Component {
                   <br />
                   <br />
 
-                  <Box fill="horizontal">
+                  <Box fill="horizontal" id="first_section">
                     <Box flex="grow" background="brand" align="center">
                       <Heading
                         level="4"
