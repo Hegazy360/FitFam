@@ -8,6 +8,7 @@
     "react": "^16.8.3",
     "react-dom": "^16.8.3",
     "react-ga": "^2.5.7",
+    "react-id-swiper": "^1.6.9",
     "react-lottie": "^1.2.3",
     "react-paypal-express-checkout": "^1.0.5",
     "react-router-dom": "^4.3.1",
