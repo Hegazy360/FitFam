@@ -8,16 +8,10 @@ const serviceAccount = require("./trainiac-ccc94-firebase-adminsdk-l3oiy-9ceed19
 
 // Initialize the app with a service account, granting admin privileges
 admin.initializeApp({
-  credential: admin.credential.cert(serviceAccount),
+  credential: admin.credential.cert(serviceAccount)
 });
 
 var db = admin.firestore();
-var docRef = db.collection('workout')
-
-const userRef = db.collection("workout").add({
-    fullname: "Test",
-    email: "Test@test.com"
-  });  
 
 // Serve the static files from the React app
 app.use(express.static(path.join(__dirname, "client/build")));
@@ -27,11 +21,19 @@ app.use(
   require("prerender-node").set("prerenderToken", "T7Q8m8gSJla7e2f8joL6")
 );
 
+app.use(express.json());
+
 // An api endpoint that returns a short list of items
-app.get("/api/getList", (req, res) => {
+app.post("/api/getList", (req, res) => {
   var list = ["item1", "item2", "item3"];
   res.json(list);
   console.log("Sent list of items");
+});
+
+app.post("/api/subscription", function(req, res) {
+  let data = req.body;
+  data.created_at = +new Date();
+  db.collection("workout").add(data);
 });
 
 // Handles any requests that don't match the ones above

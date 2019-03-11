@@ -18,6 +18,8 @@ import { Close, Menu, Info } from 'grommet-icons';
 import { Link } from 'react-router-dom';
 
 import SubscriptionForm from './pages/SubscriptionForm';
+import SubscriptionFormSuccess from './pages/SubscriptionFormSuccess';
+
 import Home from './pages/Home';
 
 const theme = {
@@ -62,7 +64,10 @@ class App extends Component {
           {size => (
             <Box fill>
               <AppBar>
-                <Link to="/" style={{ textDecoration: 'none', color: 'rgb(68, 68, 68)' }}>
+                <Link
+                  to="/"
+                  style={{ textDecoration: 'none', color: 'rgb(68, 68, 68)' }}
+                >
                   <Heading level="3" margin="none">
                     Trainiac
                   </Heading>
@@ -79,6 +84,7 @@ class App extends Component {
               <Switch>
                 <Route exact path="/" component={Home} size={size} />
                 <Route path="/subscription" component={SubscriptionForm} />
+                <Route path="/success" component={SubscriptionFormSuccess} />
               </Switch>
               {!showSidebar || size !== 'small' ? (
                 <Collapsible direction="horizontal" open={showSidebar}>
