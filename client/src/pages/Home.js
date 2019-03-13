@@ -33,7 +33,7 @@ class Home extends Component {
   }
 
   componentDidMount() {
-    let self = this;
+    const self = this;
     // TODO Refactor to one function
     axios
       .get('/api/usersCount')
