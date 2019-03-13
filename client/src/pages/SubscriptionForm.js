@@ -15,16 +15,37 @@ import {
 } from 'grommet';
 import Swiper from 'react-id-swiper';
 import Lottie from 'react-lottie';
-import { Close, Menu, Info } from 'grommet-icons';
-import { Link } from 'react-router-dom';
+import PaypalExpressBtn from 'react-paypal-express-checkout';
 
-import './../styles/carousel.css';
-import man from './../assets/images/man.svg';
-import woman from './../assets/images/woman.svg';
-import woman_skinny from './../assets/images/woman_skinny.svg';
-import woman_normal from './../assets/images/woman_normal.svg';
-import woman_curvy from './../assets/images/woman_curvy.svg';
-import bodyTypes from './../assets/images/bodyTypes.jpg';
+import '../styles/carousel.css';
+import man from '../assets/images/man.svg';
+import woman from '../assets/images/woman.svg';
+import woman_skinny from '../assets/images/woman_skinny.svg';
+import woman_normal from '../assets/images/woman_normal.svg';
+import woman_curvy from '../assets/images/woman_curvy.svg';
+import bodyTypes from '../assets/images/bodyTypes.jpg';
+
+const env = 'production';
+const currency = 'EUR';
+const total = 0.1;
+
+const client = {
+  sandbox:
+    'AW-K-5tXnLRoqC3zumljD-JNM5MhS5hVLtdBxGu6n2KpsyXFdtvmaiWYEfkApLJ16LmAeo-tIIu5Bt4V',
+  production:
+    'AX14sTa9Dxa7y5r2YuxfSyd3i2jtXL2JcKF-3ZpAU9v9faVdF_sl5hSMnQymVmVteW-8Vn-1jc6_y4PK'
+};
+
+const params = {
+  pagination: {
+    el: '.swiper-pagination',
+    type: 'progressbar'
+  },
+  navigation: {
+    nextEl: '.swiper-button-next',
+    prevEl: '.swiper-button-prev'
+  }
+};
 
 export class SubscriptionForm extends Component {
   constructor(props) {
@@ -49,12 +70,14 @@ export class SubscriptionForm extends Component {
     this.goNext();
   };
 
-  simulatePaySuccess = () => {
+  onSuccess = payment => {
+    console.log('Payment successful!', payment);
     const { history } = this.props;
+    const data = this.state;
+    data.paymentInfo = payment;
     axios
-      .post('/api/subscription', this.state)
+      .post('/api/subscription', data)
       .then(function(response) {
-        console.log(response);
         history.push('/success');
       })
       .catch(function(error) {
@@ -62,18 +85,15 @@ export class SubscriptionForm extends Component {
       });
   };
 
-  render() {
-    const params = {
-      pagination: {
-        el: '.swiper-pagination',
-        type: 'progressbar'
-      },
-      navigation: {
-        nextEl: '.swiper-button-next',
-        prevEl: '.swiper-button-prev'
-      }
-    };
+  onCancel = data => {
+    console.log('Payment cancelled!', data);
+  };
 
+  onError = err => {
+    console.log('Error!', err);
+  };
+
+  render() {
     return (
       <div style={{ width: '100%', overflow: 'hidden' }}>
         <Swiper
@@ -142,7 +162,24 @@ export class SubscriptionForm extends Component {
             </Box>
           </Box>
           <Box style={{ padding: '20px 40px' }} align="center" pad="large">
-            <Button label="PAY NOW" onClick={this.simulatePaySuccess} />
+            <div style={{ width: '100%' }}>
+              <PaypalExpressBtn
+                env={env}
+                client={client}
+                currency={currency}
+                total={total}
+                onError={this.onError}
+                onSuccess={this.onSuccess}
+                onCancel={this.onCancel}
+                style={{
+                  size: 'responsive',
+                  color: 'gold',
+                  shape: 'pill',
+                  label: 'checkout',
+                  layout: 'vertical'
+                }}
+              />
+            </div>
           </Box>
           <div>Slide 4</div>
           <div>Slide 5</div>

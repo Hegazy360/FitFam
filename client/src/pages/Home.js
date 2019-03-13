@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Route, Switch } from 'react-router-dom';
+import axios from 'axios';
 import {
   Box,
   Button,
@@ -14,15 +15,55 @@ import {
   Text
 } from 'grommet';
 import Lottie from 'react-lottie';
+import AnimatedNumber from 'react-animated-number';
 import { Close, Menu, Info } from 'grommet-icons';
 import { Link } from 'react-router-dom';
-import homepage from './../assets/images/homepage.jpg';
+import homepage from '../assets/images/homepage.jpg';
 
+const getRandomInt = (min, max) =>
+  Math.floor(Math.random() * (max - min + 1)) + min;
 
 class Home extends Component {
+  constructor() {
+    super();
+
+    this.state = {
+      usersCount: 0
+    };
+  }
+
+  componentDidMount() {
+    let self = this;
+    // TODO Refactor to one function
+    axios
+      .get('/api/usersCount')
+      .then(function(response) {
+        self.setState({ usersCount: response.data });
+      })
+      .catch(function(error) {
+        console.log(error);
+      });
+    this.usersCountInterval = setInterval(
+      () =>
+        axios
+          .get('/api/usersCount')
+          .then(function(response) {
+            self.setState({ usersCount: response.data });
+          })
+          .catch(function(error) {
+            console.log(error);
+          }),
+      120000
+    );
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.usersCountInterval);
+  }
 
   render() {
     const { size } = this.props;
+    const { usersCount } = this.state;
 
     return (
       <Box direction="row" flex overflow={{ horizontal: 'hidden' }}>
@@ -75,7 +116,33 @@ class Home extends Component {
           </Box>
           <br />
           <br />
-
+          <br />
+          <div style={{ textAlign: 'center' }}>
+            <AnimatedNumber
+              value={usersCount}
+              stepPrecision={0}
+              style={{
+                transition: '0.8s ease-out',
+                fontSize: 80,
+                fontFamily: 600,
+                transitionProperty: 'background-color, color, opacity'
+              }}
+              frameStyle={perc => (perc === 100 ? {} : { opacity: 0.25 })}
+              duration={800}
+            />
+            <div>
+              <Text
+                margin="none"
+                textAlign="center"
+                size="xxlarge"
+                style={{ fontWeight: 600 }}
+              >
+                Trainiac Beasts
+              </Text>
+            </div>
+          </div>
+          <br />
+          <br />
           <Box fill="horizontal" id="first_section">
             <Box flex="grow" background="brand" align="center">
               <Heading
@@ -195,18 +262,16 @@ class Home extends Component {
                 <br />
               </Paragraph>
             </Box>
-            <Box flex="grow" background="#4CAF50" align="center">
+            <Box flex="grow" align="center">
               <Carousel fill>
                 <Box
                   style={{ padding: '20px 30px 40px' }}
                   align="center"
                   height="350px"
-                  background="accent-1"
                   justify="between"
                 >
                   <Text
                     margin="none"
-                    color="white"
                     textAlign="center"
                     size="xxlarge"
                     style={{ fontWeight: 600 }}
@@ -216,7 +281,6 @@ class Home extends Component {
                   <br />
                   <Text
                     margin="none"
-                    color="white"
                     textAlign="center"
                     size="medium"
                     style={{ fontWeight: 500 }}
@@ -225,7 +289,6 @@ class Home extends Component {
                   </Text>
                   <Text
                     margin="none"
-                    color="white"
                     textAlign="center"
                     size="medium"
                     style={{ fontWeight: 500 }}
@@ -235,23 +298,16 @@ class Home extends Component {
                   {/* <Attraction size="large" /> */}
                   <br />
                   <br />
-                  <Button
-                    primary
-                    color="white"
-                    label="Start now"
-                    onClick={() => {}}
-                  />
+                  <Button primary label="Start now" onClick={() => {}} />
                 </Box>
                 <Box
                   style={{ padding: '20px 20px 40px' }}
                   align="center"
                   height="350px"
-                  background="accent-2"
                   justify="between"
                 >
                   <Text
                     margin="none"
-                    color="white"
                     textAlign="center"
                     size="xxlarge"
                     style={{ fontWeight: 600 }}
@@ -261,7 +317,6 @@ class Home extends Component {
                   <br />
                   <Text
                     margin="none"
-                    color="white"
                     textAlign="center"
                     size="medium"
                     style={{ fontWeight: 500 }}
@@ -270,7 +325,6 @@ class Home extends Component {
                   </Text>
                   <Text
                     margin="none"
-                    color="white"
                     textAlign="center"
                     size="medium"
                     style={{ fontWeight: 500 }}
@@ -279,7 +333,6 @@ class Home extends Component {
                   </Text>
                   <Text
                     margin="none"
-                    color="white"
                     textAlign="center"
                     size="medium"
                     style={{ fontWeight: 500 }}
@@ -290,23 +343,16 @@ class Home extends Component {
                   {/* <Attraction size="large" /> */}
                   <br />
                   <br />
-                  <Button
-                    primary
-                    color="white"
-                    label="Start now"
-                    onClick={() => {}}
-                  />
+                  <Button primary label="Start now" onClick={() => {}} />
                 </Box>
                 <Box
                   style={{ padding: '20px 20px 40px' }}
                   align="center"
                   height="350px"
-                  background="accent-3"
                   justify="between"
                 >
                   <Text
                     margin="none"
-                    color="white"
                     textAlign="center"
                     size="xxlarge"
                     style={{ fontWeight: 600 }}
@@ -316,7 +362,6 @@ class Home extends Component {
                   <br />
                   <Text
                     margin="none"
-                    color="white"
                     textAlign="center"
                     size="medium"
                     style={{ fontWeight: 500 }}
@@ -325,7 +370,6 @@ class Home extends Component {
                   </Text>
                   <Text
                     margin="none"
-                    color="white"
                     textAlign="center"
                     size="medium"
                     style={{ fontWeight: 500 }}
@@ -334,7 +378,6 @@ class Home extends Component {
                   </Text>
                   <Text
                     margin="none"
-                    color="white"
                     textAlign="center"
                     size="medium"
                     style={{ fontWeight: 500 }}
@@ -344,7 +387,6 @@ class Home extends Component {
                   </Text>
                   <Text
                     margin="none"
-                    color="white"
                     textAlign="center"
                     size="medium"
                     style={{ fontWeight: 500 }}
@@ -354,12 +396,7 @@ class Home extends Component {
                   {/* <Attraction size="large" /> */}
                   <br />
                   <br />
-                  <Button
-                    primary
-                    color="white"
-                    label="Start now"
-                    onClick={() => {}}
-                  />
+                  <Button primary label="Start now" onClick={() => {}} />
                 </Box>
               </Carousel>
             </Box>
