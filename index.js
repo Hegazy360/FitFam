@@ -26,11 +26,6 @@ var usersCount = getUsersCount();
 // Serve the static files from the React app
 app.use(express.static(path.join(__dirname, "client/build")));
 
-// Prerender
-app.use(
-  require("prerender-node").set("prerenderToken", "T7Q8m8gSJla7e2f8joL6")
-);
-
 app.use(express.json());
 
 // An api endpoint that returns a short list of items
