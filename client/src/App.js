@@ -9,7 +9,7 @@ import {
   Layer,
   ResponsiveContext
 } from 'grommet';
-import { Close, Menu } from 'grommet-icons';
+import { Close } from 'grommet-icons';
 import { Link } from 'react-router-dom';
 
 import SubscriptionForm from './pages/SubscriptionForm';

@@ -9,7 +9,6 @@ import {
   Button,
   Select,
   Layer,
-  Heading
 } from 'grommet';
 import Swiper from 'react-id-swiper';
 import PaypalExpressBtn from 'react-paypal-express-checkout';
@@ -100,9 +99,11 @@ export class SubscriptionForm extends Component {
       }
     }
   };
+
   displayBackButton = displayBackButton => {
     this.setState({ displayBackButton });
   };
+
   setFormValue = (key, value, next) => {
     this.setState({ [`${key}`]: value });
     if (next) this.goNext();

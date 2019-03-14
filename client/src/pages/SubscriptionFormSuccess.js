@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Lottie from 'react-lottie';
-import { Box, Button, Heading, Image, Paragraph, Text } from 'grommet';
+import { Text } from 'grommet';
 
 export class SubscriptionFormSuccess extends Component {
   render() {
