@@ -57,7 +57,16 @@ export class PlansCarousel extends Component {
             <br />
             <br />
             {buttons && (
-              <Button label="Start now" style={{ fontSize: '19px' }} />
+              <Link
+                to="/subscription/basic"
+                style={{
+                  textDecoration: 'none',
+                  color: 'rgb(68, 68, 68)'
+                }}
+              >
+                (
+                <Button label="Start now" style={{ fontSize: '19px' }} />)
+              </Link>
             )}
           </Box>
           <Box
@@ -104,7 +113,16 @@ export class PlansCarousel extends Component {
             <br />
             <br />
             {buttons && (
-              <Button label="Start now" style={{ fontSize: '19px' }} />
+              <Link
+                to="/subscription/pro"
+                style={{
+                  textDecoration: 'none',
+                  color: 'rgb(68, 68, 68)'
+                }}
+              >
+                (
+                <Button label="Start now" style={{ fontSize: '19px' }} />)
+              </Link>
             )}
           </Box>
           <Box
@@ -158,17 +176,18 @@ export class PlansCarousel extends Component {
             {/* <Attraction size="large" /> */}
             <br />
             <br />
-            <Link
-              to="/subscription"
-              style={{
-                textDecoration: 'none',
-                color: 'rgb(68, 68, 68)'
-              }}
-            >
-              {buttons && (
-                <Button label="Start now" style={{ fontSize: '19px' }} />
-              )}
-            </Link>
+            {buttons && (
+              <Link
+                to="/subscription/proplus"
+                style={{
+                  textDecoration: 'none',
+                  color: 'rgb(68, 68, 68)'
+                }}
+              >
+                (
+                <Button label="Start now" style={{ fontSize: '19px' }} />)
+              </Link>
+            )}
           </Box>
         </Swiper>
       </div>
