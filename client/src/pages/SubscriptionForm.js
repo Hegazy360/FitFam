@@ -1,15 +1,7 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router';
 import axios from 'axios';
-import {
-  Box,
-  Image,
-  Text,
-  TextInput,
-  Button,
-  Select,
-  Layer,
-} from 'grommet';
+import { Box, Image, Text, TextInput, Button, Select, Layer } from 'grommet';
 import Swiper from 'react-id-swiper';
 import PaypalExpressBtn from 'react-paypal-express-checkout';
 import { Radio } from 'pretty-checkbox-react';
@@ -23,8 +15,7 @@ import woman from '../assets/images/woman.svg';
 import PlansCarousel from './PlansCarousel';
 
 const env = 'production';
-const currency = 'EUR';
-const total = 0.1;
+const currency = 'USD';
 
 const client = {
   sandbox:
@@ -63,13 +54,15 @@ export class SubscriptionForm extends Component {
     super(props);
     const { plan } = this.props.match.params;
     let planValue = 'Basic - $25';
-
+    let total = 25;
     if (plan === 'pro') {
       planValue = 'Pro - $40';
+      total = 40;
     }
 
     if (plan === 'proplus') {
       planValue = 'Pro+ - $60';
+      total = 60;
     }
 
     this.swiper = null;
@@ -78,7 +71,8 @@ export class SubscriptionForm extends Component {
       shape: null,
       plan: planValue,
       displayBackButton: false,
-      displayPopup: false
+      displayPopup: false,
+      total: total
     };
   }
 
@@ -115,12 +109,15 @@ export class SubscriptionForm extends Component {
     data.paymentInfo = payment;
     axios
       .post('/api/subscription', data)
-      .then(function(response) {
-        history.push('/success');
+      .then(() => {
+        console.log('Payment successful');
       })
-      .catch(function(error) {
+      .catch(error => {
         console.log(error);
       });
+    setTimeout(() => {
+      history.push('/success');
+    }, 1500);
   };
 
   onCancel = data => {};
@@ -130,7 +127,7 @@ export class SubscriptionForm extends Component {
   };
 
   render() {
-    const { displayBackButton, displayPopup } = this.state;
+    const { displayBackButton, displayPopup, total } = this.state;
     return (
       <div style={{ width: '100%' }}>
         <Swiper
@@ -308,9 +305,15 @@ export class SubscriptionForm extends Component {
               options={['Basic - $25', 'Pro - $40', 'Pro+ - $60']}
               value={this.state.plan}
               onChange={({ option }) => {
-                this.setState({ plan: option }, () => {
-                  this.setFormValue.bind(this, 'plan', option, false);
-                });
+                if (option === 'Basic - $25') {
+                  this.setState({ plan: option, total: 25 });
+                }
+                if (option === 'Pro - $40') {
+                  this.setState({ plan: option, total: 40 });
+                }
+                if (option === 'Pro+ - $60') {
+                  this.setState({ plan: option, total: 60 });
+                }
               }}
             />
             <br />
