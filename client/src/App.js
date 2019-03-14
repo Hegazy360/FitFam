@@ -7,14 +7,9 @@ import {
   Heading,
   Grommet,
   Layer,
-  ResponsiveContext,
-  Image,
-  Paragraph,
-  Carousel,
-  Text
+  ResponsiveContext
 } from 'grommet';
-import Lottie from 'react-lottie';
-import { Close, Menu, Info } from 'grommet-icons';
+import { Close, Menu } from 'grommet-icons';
 import { Link } from 'react-router-dom';
 
 import SubscriptionForm from './pages/SubscriptionForm';
@@ -45,7 +40,7 @@ const AppBar = props => (
     background="white"
     pad={{ left: 'medium', right: 'small', vertical: 'small' }}
     elevation="medium"
-    style={{ zIndex: '1' }}
+    style={{ zIndex: '10', height: '60px', position: 'fixed', width: '100%' }}
     {...props}
   />
 );
@@ -72,20 +67,25 @@ class App extends Component {
                     Trainiac
                   </Heading>
                 </Link>
-                <Button
-                  icon={<Menu />}
+                {/* <Button
+                  icon={<Menu color="white" />}
                   onClick={() =>
                     this.setState(prevState => ({
                       showSidebar: !prevState.showSidebar
                     }))
                   }
-                />
+                /> */}
               </AppBar>
-              <Switch>
-                <Route exact path="/" component={Home} size={size} />
-                <Route path="/subscription" component={SubscriptionForm} />
-                <Route path="/success" component={SubscriptionFormSuccess} />
-              </Switch>
+              <Box style={{ marginTop: '60px' }}>
+                <Switch>
+                  <Route exact path="/" component={Home} size={size} />
+                  <Route
+                    path="/subscription/:plan?"
+                    component={SubscriptionForm}
+                  />
+                  <Route path="/success" component={SubscriptionFormSuccess} />
+                </Switch>
+              </Box>
               {!showSidebar || size !== 'small' ? (
                 <Collapsible direction="horizontal" open={showSidebar}>
                   <Box

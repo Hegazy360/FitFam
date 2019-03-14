@@ -3,27 +3,25 @@ import { withRouter } from 'react-router';
 import axios from 'axios';
 import {
   Box,
-  Button,
-  Collapsible,
-  Heading,
-  Grommet,
-  Layer,
-  ResponsiveContext,
   Image,
-  Paragraph,
-  Text
+  Text,
+  TextInput,
+  Button,
+  Select,
+  Layer,
+  Heading
 } from 'grommet';
 import Swiper from 'react-id-swiper';
-import Lottie from 'react-lottie';
 import PaypalExpressBtn from 'react-paypal-express-checkout';
+import { Radio } from 'pretty-checkbox-react';
+import { FormPreviousLink } from 'grommet-icons';
 
 import '../styles/carousel.css';
+import '../../node_modules/pretty-checkbox/dist/pretty-checkbox.min.css';
 import man from '../assets/images/man.svg';
 import woman from '../assets/images/woman.svg';
-import woman_skinny from '../assets/images/woman_skinny.svg';
-import woman_normal from '../assets/images/woman_normal.svg';
-import woman_curvy from '../assets/images/woman_curvy.svg';
-import bodyTypes from '../assets/images/bodyTypes.jpg';
+
+import PlansCarousel from './PlansCarousel';
 
 const env = 'production';
 const currency = 'EUR';
@@ -40,38 +38,77 @@ const params = {
   pagination: {
     el: '.swiper-pagination',
     type: 'progressbar'
-  },
-  navigation: {
-    nextEl: '.swiper-button-next',
-    prevEl: '.swiper-button-prev'
   }
+};
+
+const RadioButton = props => {
+  const { name, label } = props;
+  return (
+    <Radio
+      shape="curve"
+      plain
+      color="brand"
+      animation="tada"
+      icon={<i className="mdi mdi-check" />}
+      name={name}
+      value={label}
+      onChange={props.onChange.bind(this, name, label)}
+    >
+      {label}
+    </Radio>
+  );
 };
 
 export class SubscriptionForm extends Component {
   constructor(props) {
     super(props);
+    const { plan } = this.props.match.params;
+    let planValue = 'Basic - $25';
+
+    if (plan === 'pro') {
+      planValue = 'Pro - $40';
+    }
+
+    if (plan === 'proplus') {
+      planValue = 'Pro+ - $60';
+    }
+
     this.swiper = null;
     this.state = {
       gender: null,
-      shape: null
+      shape: null,
+      plan: planValue,
+      displayBackButton: false,
+      displayPopup: false
     };
   }
 
   goNext = () => {
-    if (this.swiper) this.swiper.slideNext();
+    if (this.swiper) {
+      this.swiper.slideNext();
+      if (!this.state.displayBackButton) {
+        this.displayBackButton(true);
+      }
+    }
   };
 
   goPrev = () => {
-    if (this.swiper) this.swiper.slidePrev();
+    if (this.swiper) {
+      this.swiper.slidePrev();
+      if (this.swiper.realIndex === 0) {
+        this.displayBackButton(false);
+      }
+    }
   };
-
-  setFormValue = (key, value) => {
-    this.setState({ [`${key}`]: value }, () => console.log(this.state));
-    this.goNext();
+  displayBackButton = displayBackButton => {
+    this.setState({ displayBackButton });
+  };
+  setFormValue = (key, value, next) => {
+    this.setState({ [`${key}`]: value });
+    if (next) this.goNext();
   };
 
   onSuccess = payment => {
-    console.log('Payment successful!', payment);
     const { history } = this.props;
     const data = this.state;
     data.paymentInfo = payment;
@@ -85,18 +122,18 @@ export class SubscriptionForm extends Component {
       });
   };
 
-  onCancel = data => {
-    console.log('Payment cancelled!', data);
-  };
+  onCancel = data => {};
 
   onError = err => {
     console.log('Error!', err);
   };
 
   render() {
+    const { displayBackButton, displayPopup } = this.state;
     return (
-      <div style={{ width: '100%', overflow: 'hidden' }}>
+      <div style={{ width: '100%' }}>
         <Swiper
+          noSwiping
           {...params}
           ref={node => {
             if (node) this.swiper = node.swiper;
@@ -111,6 +148,7 @@ export class SubscriptionForm extends Component {
             >
               What's your gender ?
             </Text>
+            <br />
             <Box direction="row" align="center" pad="large">
               <Image
                 style={{ padding: '20px' }}
@@ -128,40 +166,186 @@ export class SubscriptionForm extends Component {
               />
             </Box>
           </Box>
-          <Box style={{ padding: '20px 40px' }} align="center" pad="large">
+          <Box style={{ padding: '20px 40px' }} pad="large">
             <Text
               margin="none"
               textAlign="center"
               size="medium"
               style={{ fontWeight: 500 }}
             >
-              Which picture presents your current shape ?
+              What's your current shape ?
             </Text>
-            <Box direction="row" align="center" pad="small">
-              <Image
-                style={{ padding: '20px' }}
-                fit="contain"
-                width="33%"
-                src={woman_skinny}
-                onClick={this.setFormValue.bind(this, 'shape', 'skinny')}
+            <br />
+            <Box pad="large" style={{ fontSize: '18px' }}>
+              <RadioButton
+                name="shape"
+                label="Skinny"
+                onChange={this.setFormValue}
               />
-              <Image
-                style={{ padding: '20px' }}
-                fit="contain"
-                width="33%"
-                src={woman_normal}
-                onClick={this.setFormValue.bind(this, 'shape', 'normal')}
+              <br />
+              <RadioButton
+                name="shape"
+                label="Fit"
+                onChange={this.setFormValue}
               />
-              <Image
-                style={{ padding: '20px' }}
-                fit="contain"
-                width="33%"
-                src={woman_curvy}
-                onClick={this.setFormValue.bind(this, 'shape', 'curvy')}
+              <br />
+              <RadioButton
+                name="shape"
+                label="Average"
+                onChange={this.setFormValue}
+              />
+              <br />
+              <RadioButton
+                name="shape"
+                label="Over-weight"
+                onChange={this.setFormValue}
               />
             </Box>
           </Box>
-          <Box style={{ padding: '20px 40px' }} align="center" pad="large">
+          <Box style={{ padding: '20px 40px' }} pad="large">
+            <Text
+              margin="none"
+              textAlign="center"
+              size="medium"
+              style={{ fontWeight: 500 }}
+            >
+              What's your body type ?
+            </Text>
+            <br />
+            <Box pad="large" style={{ fontSize: '18px' }}>
+              <RadioButton
+                name="type"
+                label="Ectomorph"
+                onChange={this.setFormValue}
+              />
+              <br />
+              <RadioButton
+                name="type"
+                label="Endomorph"
+                onChange={this.setFormValue}
+              />
+              <br />
+              <RadioButton
+                name="type"
+                label="Mesomorph"
+                onChange={this.setFormValue}
+              />
+            </Box>
+          </Box>
+          <Box style={{ padding: '20px 40px' }} pad="large">
+            <Text
+              margin="none"
+              textAlign="center"
+              size="medium"
+              style={{ fontWeight: 500 }}
+            >
+              What's your age ?
+            </Text>
+            <br />
+            <Box pad="large" style={{ fontSize: '18px' }}>
+              <RadioButton
+                name="age"
+                label="Below 18"
+                onChange={this.setFormValue}
+              />
+              <br />
+              <RadioButton
+                name="age"
+                label="Between 18 and 40"
+                onChange={this.setFormValue}
+              />
+              <br />
+              <RadioButton
+                name="age"
+                label="Between 40 and 60"
+                onChange={this.setFormValue}
+              />
+              <br />
+              <RadioButton
+                name="age"
+                label="Over 60"
+                onChange={this.setFormValue}
+              />
+            </Box>
+          </Box>
+          <Box style={{ padding: '20px 40px' }} pad="large">
+            <Text
+              margin="none"
+              textAlign="center"
+              size="medium"
+              style={{ fontWeight: 500 }}
+            >
+              What's your email ?
+            </Text>
+            <br />
+            <br />
+            <TextInput
+              type="email"
+              onChange={event =>
+                this.setFormValue('email', event.target.value, false)
+              }
+            />
+            <Text size="xsmall">
+              We need it to send you your workout plan and follow up with you!
+            </Text>
+            <br />
+            <Button label="Go to payment" onClick={this.goNext} />
+          </Box>
+          <Box style={{ padding: '20px 40px' }} pad="large">
+            <Text
+              margin="none"
+              textAlign="center"
+              size="medium"
+              style={{ fontWeight: 500 }}
+            >
+              Which plan would you like ?
+            </Text>
+            <br />
+            <br />
+            <Select
+              style={{ width: '100%' }}
+              options={['Basic - $25', 'Pro - $40', 'Pro+ - $60']}
+              value={this.state.plan}
+              onChange={({ option }) => {
+                this.setState({ plan: option }, () => {
+                  this.setFormValue.bind(this, 'plan', option, false);
+                });
+              }}
+            />
+            <br />
+            <Box align="center" justify="center">
+              <Button
+                plain
+                size="xsmall"
+                label="See more details"
+                onClick={() => {
+                  this.setState({ displayPopup: true });
+                }}
+              />
+            </Box>
+            <br />
+            {displayPopup && (
+              <Layer
+                position="center"
+                modal
+                responsive={false}
+                style={{ paddingBottom: '18px' }}
+                onClickOutside={() => {
+                  this.setState({ displayPopup: false });
+                }}
+              >
+                <PlansCarousel buttons={false} />
+                <Box align="center" justify="center">
+                  <Button
+                    label="Got it!"
+                    onClick={() => {
+                      this.setState({ displayPopup: false });
+                    }}
+                  />
+                </Box>
+              </Layer>
+            )}
+            <br />
             <div style={{ width: '100%' }}>
               <PaypalExpressBtn
                 env={env}
@@ -181,9 +365,20 @@ export class SubscriptionForm extends Component {
               />
             </div>
           </Box>
-          <div>Slide 4</div>
-          <div>Slide 5</div>
         </Swiper>
+        {displayBackButton && (
+          <Button
+            style={{
+              zIndex: 10,
+              position: 'absolute',
+              top: '60px',
+              left: '-5px'
+            }}
+            color="accent-4"
+            icon={<FormPreviousLink size="40px" />}
+            onClick={this.goPrev}
+          />
+        )}
       </div>
     );
   }

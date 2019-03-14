@@ -1,27 +1,12 @@
 import React, { Component } from 'react';
-import { Route, Switch } from 'react-router-dom';
 import axios from 'axios';
-import {
-  Box,
-  Button,
-  Collapsible,
-  Heading,
-  Grommet,
-  Layer,
-  ResponsiveContext,
-  Image,
-  Paragraph,
-  Carousel,
-  Text
-} from 'grommet';
+import { Box, Button, Heading, Image, Paragraph, Text } from 'grommet';
 import Lottie from 'react-lottie';
 import AnimatedNumber from 'react-animated-number';
-import { Close, Menu, Info } from 'grommet-icons';
+import { Info } from 'grommet-icons';
 import { Link } from 'react-router-dom';
 import homepage from '../assets/images/homepage.jpg';
-
-const getRandomInt = (min, max) =>
-  Math.floor(Math.random() * (max - min + 1)) + min;
+import PlansCarousel from './PlansCarousel';
 
 class Home extends Component {
   constructor() {
@@ -62,7 +47,6 @@ class Home extends Component {
   }
 
   render() {
-    const { size } = this.props;
     const { usersCount } = this.state;
 
     return (
@@ -262,144 +246,7 @@ class Home extends Component {
                 <br />
               </Paragraph>
             </Box>
-            <Box flex="grow" align="center">
-              <Carousel fill>
-                <Box
-                  style={{ padding: '20px 30px 40px' }}
-                  align="center"
-                  height="350px"
-                  justify="between"
-                >
-                  <Text
-                    margin="none"
-                    textAlign="center"
-                    size="xxlarge"
-                    style={{ fontWeight: 600 }}
-                  >
-                    Basic - $25
-                  </Text>
-                  <br />
-                  <Text
-                    margin="none"
-                    textAlign="center"
-                    size="medium"
-                    style={{ fontWeight: 500 }}
-                  >
-                    Custom workout plan
-                  </Text>
-                  <Text
-                    margin="none"
-                    textAlign="center"
-                    size="medium"
-                    style={{ fontWeight: 500 }}
-                  >
-                    1 Monthly follow-up by one of the coaches
-                  </Text>
-                  {/* <Attraction size="large" /> */}
-                  <br />
-                  <br />
-                  <Button primary label="Start now" onClick={() => {}} />
-                </Box>
-                <Box
-                  style={{ padding: '20px 20px 40px' }}
-                  align="center"
-                  height="350px"
-                  justify="between"
-                >
-                  <Text
-                    margin="none"
-                    textAlign="center"
-                    size="xxlarge"
-                    style={{ fontWeight: 600 }}
-                  >
-                    Pro - $40
-                  </Text>
-                  <br />
-                  <Text
-                    margin="none"
-                    textAlign="center"
-                    size="medium"
-                    style={{ fontWeight: 500 }}
-                  >
-                    Custom workout plan
-                  </Text>
-                  <Text
-                    margin="none"
-                    textAlign="center"
-                    size="medium"
-                    style={{ fontWeight: 500 }}
-                  >
-                    2 Monthly follow-ups by one of the coaches
-                  </Text>
-                  <Text
-                    margin="none"
-                    textAlign="center"
-                    size="medium"
-                    style={{ fontWeight: 500 }}
-                  >
-                    Personal communication line with one of the coaches for any
-                    questions
-                  </Text>
-                  {/* <Attraction size="large" /> */}
-                  <br />
-                  <br />
-                  <Button primary label="Start now" onClick={() => {}} />
-                </Box>
-                <Box
-                  style={{ padding: '20px 20px 40px' }}
-                  align="center"
-                  height="350px"
-                  justify="between"
-                >
-                  <Text
-                    margin="none"
-                    textAlign="center"
-                    size="xxlarge"
-                    style={{ fontWeight: 600 }}
-                  >
-                    Pro+ - $60
-                  </Text>
-                  <br />
-                  <Text
-                    margin="none"
-                    textAlign="center"
-                    size="medium"
-                    style={{ fontWeight: 500 }}
-                  >
-                    Custom workout plan
-                  </Text>
-                  <Text
-                    margin="none"
-                    textAlign="center"
-                    size="medium"
-                    style={{ fontWeight: 500 }}
-                  >
-                    Weekly follow-up by one of the coaches
-                  </Text>
-                  <Text
-                    margin="none"
-                    textAlign="center"
-                    size="medium"
-                    style={{ fontWeight: 500 }}
-                  >
-                    Personal communication line with one of the coaches for any
-                    questions
-                  </Text>
-                  <Text
-                    margin="none"
-                    textAlign="center"
-                    size="medium"
-                    style={{ fontWeight: 500 }}
-                  >
-                    Diet planning and nutrition following
-                  </Text>
-                  {/* <Attraction size="large" /> */}
-                  <br />
-                  <br />
-                  <Button primary label="Start now" onClick={() => {}} />
-                </Box>
-              </Carousel>
-            </Box>
+            <PlansCarousel />
           </Box>
         </Box>
       </Box>
