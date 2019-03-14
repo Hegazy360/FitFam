@@ -72,7 +72,8 @@ export class SubscriptionForm extends Component {
       plan: planValue,
       displayBackButton: false,
       displayPopup: false,
-      total: total
+      total: total,
+      goal: null
     };
   }
 
@@ -207,25 +208,25 @@ export class SubscriptionForm extends Component {
               size="medium"
               style={{ fontWeight: 500 }}
             >
-              What's your body type ?
+              What's your goal ?
             </Text>
             <br />
             <Box pad="large" style={{ fontSize: '18px' }}>
               <RadioButton
-                name="type"
-                label="Ectomorph"
+                name="goal"
+                label="Lose weight"
                 onChange={this.setFormValue}
               />
               <br />
               <RadioButton
-                name="type"
-                label="Endomorph"
+                name="goal"
+                label="Gain Muscle"
                 onChange={this.setFormValue}
               />
               <br />
               <RadioButton
-                name="type"
-                label="Mesomorph"
+                name="goal"
+                label="Complete transformation"
                 onChange={this.setFormValue}
               />
             </Box>
