@@ -71,15 +71,16 @@ class Home extends Component {
           <br />
           <Heading
             margin="none"
-            level="2"
+            level="1"
             textAlign="center"
+            size="medium"
             style={{ fontWeight: 500 }}
           >
             Get fit faster
           </Heading>
           <Heading
             margin="medium"
-            level="3"
+            level="2"
             textAlign="center"
             style={{ fontWeight: 500 }}
             size="small"

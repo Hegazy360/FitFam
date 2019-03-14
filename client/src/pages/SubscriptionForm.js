@@ -73,7 +73,7 @@ export class SubscriptionForm extends Component {
       plan: planValue,
       displayBackButton: false,
       displayPopup: false,
-      total: total,
+      total,
       goal: null
     };
   }
