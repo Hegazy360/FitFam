@@ -64,8 +64,7 @@ export class PlansCarousel extends Component {
                   color: 'rgb(68, 68, 68)'
                 }}
               >
-                (
-                <Button label="Start now" style={{ fontSize: '19px' }} />)
+                <Button label="Start now" style={{ fontSize: '19px' }} />
               </Link>
             )}
           </Box>
@@ -120,8 +119,7 @@ export class PlansCarousel extends Component {
                   color: 'rgb(68, 68, 68)'
                 }}
               >
-                (
-                <Button label="Start now" style={{ fontSize: '19px' }} />)
+                <Button label="Start now" style={{ fontSize: '19px' }} />
               </Link>
             )}
           </Box>
@@ -184,8 +182,7 @@ export class PlansCarousel extends Component {
                   color: 'rgb(68, 68, 68)'
                 }}
               >
-                (
-                <Button label="Start now" style={{ fontSize: '19px' }} />)
+                <Button label="Start now" style={{ fontSize: '19px' }} />
               </Link>
             )}
           </Box>
