@@ -11,6 +11,7 @@ import {
 } from 'grommet';
 import { Close } from 'grommet-icons';
 import { Link } from 'react-router-dom';
+import ReactGA from 'react-ga';
 
 import SubscriptionForm from './pages/SubscriptionForm';
 import SubscriptionFormSuccess from './pages/SubscriptionFormSuccess';
@@ -49,6 +50,11 @@ class App extends Component {
   state = {
     showSidebar: false
   };
+
+  componentDidMount() {
+    ReactGA.initialize('UA-135073250-1');
+    ReactGA.pageview('home');
+  }
 
   render() {
     const { showSidebar } = this.state;
