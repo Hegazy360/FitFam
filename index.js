@@ -28,6 +28,11 @@ app.use(express.static(path.join(__dirname, "client/build")));
 
 app.use(express.json());
 
+// Prerender
+app.use(
+  require("prerender-node").set("prerenderToken", "T7Q8m8gSJla7e2f8joL6")
+);
+
 app.post("/api/subscription", function(req, res) {
   let data = req.body;
   data.created_at = +new Date();

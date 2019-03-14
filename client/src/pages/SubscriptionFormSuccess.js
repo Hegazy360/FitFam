@@ -1,11 +1,21 @@
 import React, { Component } from 'react';
 import Lottie from 'react-lottie';
+import { Helmet } from 'react-helmet';
 import { Text } from 'grommet';
 
 export class SubscriptionFormSuccess extends Component {
   render() {
     return (
       <div style={{ textAlign: 'center', padding: '20px 40px' }}>
+        <Helmet>
+          <meta charSet="utf-8" />
+          <title>Trainiac - Subscription Completed</title>
+          <meta
+            name="description"
+            content="Your custom workout plan is on the way!"
+          />
+          <link rel="canonical" href="https://trainiac.io/success" />
+        </Helmet>
         <Lottie
           options={{
             loop: false,

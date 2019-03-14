@@ -3,6 +3,7 @@ import axios from 'axios';
 import { Box, Button, Heading, Image, Paragraph, Text } from 'grommet';
 import Lottie from 'react-lottie';
 import AnimatedNumber from 'react-animated-number';
+import { Helmet } from 'react-helmet';
 import { Info } from 'grommet-icons';
 import { Link } from 'react-router-dom';
 import homepage from '../assets/images/homepage.jpg';
@@ -51,6 +52,12 @@ class Home extends Component {
 
     return (
       <Box direction="row" flex overflow={{ horizontal: 'hidden' }}>
+        <Helmet>
+          <meta charSet="utf-8" />
+          <title>Trainiac</title>
+          <meta name="description" content="The fastest way to get in shape" />
+          <link rel="canonical" href="https://trainiac.io/" />
+        </Helmet>
         <Box flex align="center" justify="center">
           <Image
             fit="cover"

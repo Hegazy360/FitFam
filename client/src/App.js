@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Route, Switch } from 'react-router-dom';
+import { Route, Switch, Link } from 'react-router-dom';
 import {
   Box,
   Button,
@@ -10,7 +10,6 @@ import {
   ResponsiveContext
 } from 'grommet';
 import { Close } from 'grommet-icons';
-import { Link } from 'react-router-dom';
 import ReactGA from 'react-ga';
 
 import SubscriptionForm from './pages/SubscriptionForm';

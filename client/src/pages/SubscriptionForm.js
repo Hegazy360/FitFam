@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router';
 import axios from 'axios';
+import { Helmet } from 'react-helmet';
 import { Box, Image, Text, TextInput, Button, Select, Layer } from 'grommet';
 import Swiper from 'react-id-swiper';
 import PaypalExpressBtn from 'react-paypal-express-checkout';
@@ -131,6 +132,15 @@ export class SubscriptionForm extends Component {
     const { displayBackButton, displayPopup, total } = this.state;
     return (
       <div style={{ width: '100%' }}>
+        <Helmet>
+          <meta charSet="utf-8" />
+          <title>Trainiac - Subscription Form</title>
+          <meta
+            name="description"
+            content="Fast interactive form to help us create the best workout plan for you"
+          />
+          <link rel="canonical" href="https://trainiac.io/subscription" />
+        </Helmet>
         <Swiper
           noSwiping
           {...params}
