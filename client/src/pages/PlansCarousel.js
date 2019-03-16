@@ -10,7 +10,7 @@ const params = {
   }
 };
 
-export class PlansCarousel extends Component {
+class PlansCarousel extends Component {
   render() {
     const { buttons = true } = this.props;
 

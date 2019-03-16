@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unused-state */
 import React, { Component } from 'react';
 import { withRouter } from 'react-router';
 import axios from 'axios';
@@ -33,7 +34,7 @@ const params = {
 };
 
 const RadioButton = props => {
-  const { name, label } = props;
+  const { name, label, onChange } = props;
   return (
     <Radio
       shape="curve"
@@ -43,17 +44,18 @@ const RadioButton = props => {
       icon={<i className="mdi mdi-check" />}
       name={name}
       value={label}
-      onChange={props.onChange.bind(this, name, label)}
+      onChange={() => onChange(name, label)}
     >
       {label}
     </Radio>
   );
 };
 
-export class SubscriptionForm extends Component {
+class SubscriptionForm extends Component {
   constructor(props) {
     super(props);
-    const { plan } = this.props.match.params;
+    const { match } = this.props;
+    const { plan } = match.params;
     let planValue = 'Basic - $25';
     let total = 25;
     if (plan === 'pro') {
@@ -79,9 +81,10 @@ export class SubscriptionForm extends Component {
   }
 
   goNext = () => {
+    const { displayBackButton } = this.state;
     if (this.swiper) {
       this.swiper.slideNext();
-      if (!this.state.displayBackButton) {
+      if (!displayBackButton) {
         this.displayBackButton(true);
       }
     }
@@ -100,8 +103,8 @@ export class SubscriptionForm extends Component {
     this.setState({ displayBackButton });
   };
 
-  setFormValue = (key, value, next) => {
-    this.setState({ [`${key}`]: value });
+  setFormValue = (key, value, next = true) => {
+    this.setState({ [`${key}`]: value }, () => console.log(this.state));
     if (next) this.goNext();
   };
 
@@ -122,14 +125,12 @@ export class SubscriptionForm extends Component {
     }, 1500);
   };
 
-  onCancel = data => {};
-
   onError = err => {
     console.log('Error!', err);
   };
 
   render() {
-    const { displayBackButton, displayPopup, total } = this.state;
+    const { displayBackButton, displayPopup, total, plan } = this.state;
     return (
       <div style={{ width: '100%' }}>
         <Helmet>
@@ -155,7 +156,7 @@ export class SubscriptionForm extends Component {
               size="medium"
               style={{ fontWeight: 500 }}
             >
-              What's your gender ?
+              What&apos;s your gender ?
             </Text>
             <br />
             <Box direction="row" align="center" pad="large">
@@ -164,14 +165,14 @@ export class SubscriptionForm extends Component {
                 fit="contain"
                 width="100%"
                 src={man}
-                onClick={this.setFormValue.bind(this, 'gender', 'man')}
+                onClick={() => this.setFormValue('gender', 'man')}
               />
               <Image
                 style={{ padding: '20px' }}
                 fit="contain"
                 width="100%"
                 src={woman}
-                onClick={this.setFormValue.bind(this, 'gender', 'woman')}
+                onClick={() => this.setFormValue('gender', 'woman')}
               />
             </Box>
           </Box>
@@ -182,7 +183,7 @@ export class SubscriptionForm extends Component {
               size="medium"
               style={{ fontWeight: 500 }}
             >
-              What's your current shape ?
+              What&apos;s your current shape ?
             </Text>
             <br />
             <Box pad="large" style={{ fontSize: '18px' }}>
@@ -218,7 +219,7 @@ export class SubscriptionForm extends Component {
               size="medium"
               style={{ fontWeight: 500 }}
             >
-              What's your goal ?
+              What&apos;s your goal ?
             </Text>
             <br />
             <Box pad="large" style={{ fontSize: '18px' }}>
@@ -248,7 +249,7 @@ export class SubscriptionForm extends Component {
               size="medium"
               style={{ fontWeight: 500 }}
             >
-              What's your age ?
+              What&apos;s your age ?
             </Text>
             <br />
             <Box pad="large" style={{ fontSize: '18px' }}>
@@ -284,7 +285,7 @@ export class SubscriptionForm extends Component {
               size="medium"
               style={{ fontWeight: 500 }}
             >
-              What's your email ?
+              What&apos;s your email ?
             </Text>
             <br />
             <br />
@@ -314,7 +315,7 @@ export class SubscriptionForm extends Component {
             <Select
               style={{ width: '100%' }}
               options={['Basic - $25', 'Pro - $40', 'Pro+ - $60']}
-              value={this.state.plan}
+              value={plan}
               onChange={({ option }) => {
                 if (option === 'Basic - $25') {
                   this.setState({ plan: option, total: 25 });
