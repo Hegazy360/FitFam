@@ -16,7 +16,6 @@ function Home() {
       <Helmet>
         <meta charSet="utf-8" />
         <title>Trainiac</title>
-        <meta name="description" content="The fastest way to get in shape" />
         <link rel="canonical" href="https://trainiac.io/" />
       </Helmet>
       <Box flex align="center" justify="center">

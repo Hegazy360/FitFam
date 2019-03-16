@@ -138,10 +138,6 @@ class SubscriptionForm extends Component {
         <Helmet>
           <meta charSet="utf-8" />
           <title>Trainiac - Subscription Form</title>
-          <meta
-            name="description"
-            content="Fast interactive form to help us create the best workout plan for you"
-          />
           <link rel="canonical" href="https://trainiac.io/subscription" />
         </Helmet>
         <Swiper

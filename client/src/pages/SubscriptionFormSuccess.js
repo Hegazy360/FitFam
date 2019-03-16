@@ -9,10 +9,6 @@ export default function SubscriptionFormSuccess() {
       <Helmet>
         <meta charSet="utf-8" />
         <title>Trainiac - Subscription Completed</title>
-        <meta
-          name="description"
-          content="Your custom workout plan is on the way!"
-        />
         <link rel="canonical" href="https://trainiac.io/success" />
       </Helmet>
       <Lottie
