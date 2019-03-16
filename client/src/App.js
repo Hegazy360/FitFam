@@ -11,11 +11,13 @@ import {
 } from 'grommet';
 import { Close } from 'grommet-icons';
 import ReactGA from 'react-ga';
+import ChatWidget from './pages/ChatWidget';
 
 import SubscriptionForm from './pages/SubscriptionForm';
 import SubscriptionFormSuccess from './pages/SubscriptionFormSuccess';
 
 import Home from './pages/Home';
+import Error404 from './pages/Error404';
 
 const theme = {
   global: {
@@ -90,6 +92,7 @@ class App extends Component {
                     component={SubscriptionForm}
                   />
                   <Route path="/success" component={SubscriptionFormSuccess} />
+                  <Route path="*" component={Error404} />
                 </Switch>
               </Box>
               {!showSidebar || size !== 'small' ? (
@@ -135,6 +138,7 @@ class App extends Component {
                   </Box>
                 </Layer>
               )}
+              <ChatWidget />
             </Box>
           )}
         </ResponsiveContext.Consumer>

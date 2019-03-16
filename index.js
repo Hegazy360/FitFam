@@ -54,6 +54,12 @@ app.post("/api/subscription", function(req, res) {
   res.json({ ok: true });
 });
 
+app.post("/api/messages", function(req, res) {
+  let data = req.body;
+  db.collection("messages").add(data);
+  res.json({ ok: true });
+});
+
 app.get("/api/usersCount", function(req, res) {
   res.json(usersCount);
 });

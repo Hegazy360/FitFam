@@ -47,7 +47,7 @@ class TrainiacCounter extends Component {
           stepPrecision={0}
           style={{
             transition: '0.8s ease-out',
-            fontSize: 80,
+            fontSize: '55px',
             fontFamily: 600,
             transitionProperty: 'background-color, color, opacity'
           }}
