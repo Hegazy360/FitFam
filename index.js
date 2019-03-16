@@ -9,11 +9,25 @@ const serviceAccount = require("./trainiac-ccc94-firebase-adminsdk-l3oiy-9ceed19
 
 // Initialize the app with a service account, granting admin privileges
 admin.initializeApp({
-  credential: admin.credential.cert(serviceAccount)
+  credential: admin.credential.cert(serviceAccount),
+  storageBucket: "trainiac-ccc94.appspot.com"
 });
 
 var db = admin.firestore();
 const usersCountRef = db.collection("usersCount").doc("usersCount");
+// var bucket = admin.storage().bucket();
+
+// getPictures = async () => {
+//   const [files] = await bucket.getFiles();
+//   if (files) {
+//     console.log("Files:", files);
+//     files.map(file => {
+//       console.log(file.metadata);
+//     });
+//   }
+// };
+
+// getPictures();
 
 getUsersCount = () => {
   usersCountRef.get().then(doc => {
@@ -59,4 +73,4 @@ setInterval(() => {
     usersCountRef.update({ count: doc.data().count + number });
     usersCount = doc.data().count + number;
   });
-}, 120000);
+}, 1800000);
