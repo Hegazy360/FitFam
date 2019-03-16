@@ -53,6 +53,7 @@ class App extends Component {
   componentDidMount() {
     ReactGA.initialize('UA-135073250-1');
     ReactGA.pageview('home');
+    window.prerenderReady = true;
   }
 
   render() {
