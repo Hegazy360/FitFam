@@ -114,7 +114,7 @@ function Home() {
             background="#4CAF50"
             title="We're affordable"
             textColor="white"
-            description="We're changing the game.Multiple plans, starting at $25.Customize everything based on your schedule, goals and
+            description="We're changing the game.Multiple plans, starting at only $10! Customize everything based on your schedule, goals and
           motivation."
             animation="atm"
           />

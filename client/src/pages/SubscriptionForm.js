@@ -56,15 +56,15 @@ class SubscriptionForm extends Component {
     super(props);
     const { match } = this.props;
     const { plan } = match.params;
-    let planValue = 'Basic - $25';
-    let total = 25;
+    let planValue = 'Basic - $10';
+    let total = 10;
     if (plan === 'pro') {
-      planValue = 'Pro - $40';
+      planValue = 'Pro - $25';
       total = 40;
     }
 
     if (plan === 'proplus') {
-      planValue = 'Pro+ - $60';
+      planValue = 'Pro+ - $40';
       total = 60;
     }
 
@@ -115,6 +115,8 @@ class SubscriptionForm extends Component {
     axios
       .post('/api/subscription', data)
       .then(() => {
+        // eslint-disable-next-line no-undef
+        gtag_report_conversion();
         console.log('Payment successful');
       })
       .catch(error => {
@@ -317,14 +319,14 @@ class SubscriptionForm extends Component {
               options={['Basic - $25', 'Pro - $40', 'Pro+ - $60']}
               value={plan}
               onChange={({ option }) => {
-                if (option === 'Basic - $25') {
+                if (option === 'Basic - $10') {
+                  this.setState({ plan: option, total: 10 });
+                }
+                if (option === 'Pro - $25') {
                   this.setState({ plan: option, total: 25 });
                 }
-                if (option === 'Pro - $40') {
+                if (option === 'Pro+ - $40') {
                   this.setState({ plan: option, total: 40 });
-                }
-                if (option === 'Pro+ - $60') {
-                  this.setState({ plan: option, total: 60 });
                 }
               }}
             />

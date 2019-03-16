@@ -51,6 +51,7 @@ app.post("/api/subscription", function(req, res) {
   let data = req.body;
   data.created_at = +new Date();
   db.collection("workout").add(data);
+  res.json({ ok: true });
 });
 
 app.get("/api/usersCount", function(req, res) {

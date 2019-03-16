@@ -34,7 +34,7 @@ class PlansCarousel extends Component {
               size="xxlarge"
               style={{ fontWeight: 600 }}
             >
-              Basic - $25
+              Basic - $10
             </Text>
             <br />
             <Text
@@ -80,7 +80,7 @@ class PlansCarousel extends Component {
               size="xxlarge"
               style={{ fontWeight: 600 }}
             >
-              Pro - $40
+              Pro - $25
             </Text>
             <br />
             <Text
@@ -135,7 +135,7 @@ class PlansCarousel extends Component {
               size="xxlarge"
               style={{ fontWeight: 600 }}
             >
-              Pro+ - $60
+              Pro+ - $40
             </Text>
             <br />
             <Text
